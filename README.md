@@ -1,4 +1,4 @@
-learning-ghpages
-================
+ghpages minimal style
+=====================
 
-Hello Github Pages
+using basic style from skeleton.
