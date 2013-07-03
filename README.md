@@ -1,4 +1,4 @@
 ghpages minimal style
 =====================
 
-using basic style from skeleton.
+using basic style skeleton from http://getskeleton.com
