@@ -6,3 +6,25 @@
 	text-align: center;
 	margin-top: 50px;
 }
+
+.author {
+    font-weight: bold;
+}
+
+.content {
+    margin-top: 50px;
+}
+
+.daftar-isi {
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+
+.daftar-isi ul li {
+    margin-left: 15px;
+    list-style: circle;
+}
+
+.paragraph {
+    text-align: justify;
+}
