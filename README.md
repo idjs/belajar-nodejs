@@ -9,7 +9,7 @@ Daftar Isi:
 + Pemrograman Asinkron
 + Server HTTP Dasar
 + Menyediakan File Statis
-+ Memproses Data Dari Form HTML
++ Memproses Data Form HTML
 + ...
 
 
@@ -37,4 +37,43 @@ Sekarang dengan berjalannya Javascript di server lalu apa keuntungan yang anda p
 + Database NoSQL seperti MongoDB dan CouchDB mendukung langsung Javascript sehingga interfacing dengan database ini akan jauh lebih mudah.
 
 + Node.js memakai V8 yang selalu mengikuti perkembangan standar ECMAScript, jadi tidak perlu ada kekhawatiran bahwa browser tidak akan mendukung fitur-fitur di Node.js.
+
+
+###Node.js In Action
+
+Supaya anda lebih tertarik dalam belajar Node.js berikut beberapa website terkenal yang sudah memakai Node.js
+
+
+www.myspace.com
+
+![myspace](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/mypspace.png)
+
+
+www.yummly.com
+
+![yummly](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/yummly.png)
+
+
+www.shutterstock.com 
+
+![shutterstock](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/shutterstock.png)
+
+
+www.klout.com
+
+![klout](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/klout.png)
+
+
+www.geekli.st
+
+![geeklist](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/geeklist.png)
+
+
+www.learnboost.com
+
+![learnboost](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/learnboost.png)
+
+
+
+
 
