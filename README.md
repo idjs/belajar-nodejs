@@ -49,9 +49,13 @@ www.myspace.com
 ![myspace](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/mypspace.png)
 
 
+
+
 www.yummly.com
 
 ![yummly](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/yummly.png)
+
+
 
 
 www.shutterstock.com 
@@ -59,14 +63,20 @@ www.shutterstock.com
 ![shutterstock](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/shutterstock.png)
 
 
+
+
 www.klout.com
 
 ![klout](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/klout.png)
 
 
+
+
 www.geekli.st
 
 ![geeklist](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/geeklist.png)
+
+
 
 
 www.learnboost.com
