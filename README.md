@@ -6,7 +6,7 @@ Maintained by Equan Pr.
 Daftar Isi:
 
 + Pengenalan
-+ Pemrograman Asinkron
++ Asinkron I/O & Event
 + Server HTTP Dasar
 + Menyediakan File Statis
 + Memproses Data Form HTML
@@ -77,8 +77,26 @@ www.learnboost.com
 Apakah masih ragu untuk memakai Node.js ?...Kalau masih penasaran apa yang membuat Node.js berbeda dari backend pada umumnya, silahkan dilanjutkan membaca :smile:
 
 
-Pemrograman Asinkron
+Asinkron I/O & Event
 --------------------
+
+Tidak seperti kebanyakan bahasa backend lainnya operasi fungsi di javascript lebih bersifat asinkron dan banyak menggunakan event. Untuk lebih jelasnya mari kita lihat contoh berikut yaitu operasi fungsi akses ke database MySQL oleh PHP secara sinkron
+
+```
+$hasil = mysql_query("SELECT * FROM TabelAnggota");
+print_r($hasil);
+```  
+
+pengambilan data oleh mysql_query() diatas akan dijalankan dan operasi berikutnya print_r() akan diblok atau tidak akan berjalan sebelum akses ke database selesai. Yang pelu menjadi perhatian disini yaitu proses Input Output atau I/O akses ke database mysql_query() dapat memakan waktu yang relatif mungkin beberapa detik atau menit tergantung dari waktu latensi dari I/O. Waktu latensi ini tergantung dari banyak hal seperti 
+
++ Query database lambat akibat banyak yang mengakses
++ Kualitas jaringan akses ke database jelek
++ Proses baca tulis ke disk komputer database yang butuh waktu
++ ...
+
+  Sebelum proses I/O belum selesai maka selama beberapa detik atau menit tersebut state dari proses mysql_query() bisa dibilang idle atau tidak akan melakukan apa-apa. 
+
+  Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menghandle request ini ? penyelesaiannya sekarang yaitu dengan memakai pendekatan proses multithread.    
 
 
 
