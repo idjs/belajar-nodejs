@@ -87,16 +87,16 @@ $hasil = mysql_query("SELECT * FROM TabelAnggota");
 print_r($hasil);
 ```  
 
-pengambilan data oleh mysql_query() diatas akan dijalankan dan operasi berikutnya print_r() akan diblok atau tidak akan berjalan sebelum akses ke database selesai. Yang pelu menjadi perhatian disini yaitu proses Input Output atau I/O akses ke database mysql_query() dapat memakan waktu yang relatif mungkin beberapa detik atau menit tergantung dari waktu latensi dari I/O. Waktu latensi ini tergantung dari banyak hal seperti 
+pengambilan data oleh `mysql_query()` diatas akan dijalankan dan operasi berikutnya `print_r()` akan diblok atau tidak akan berjalan sebelum akses ke database selesai. Yang perlu menjadi perhatian disini yaitu proses Input Output atau I/O akses ke database oleh `mysql_query()` dapat memakan waktu yang relatif mungkin beberapa detik atau menit tergantung dari waktu latensi dari I/O. Waktu latensi ini tergantung dari banyak hal seperti 
 
 + Query database lambat akibat banyak yang mengakses
 + Kualitas jaringan akses ke database jelek
 + Proses baca tulis ke disk komputer database yang butuh waktu
 + ...
 
-  Sebelum proses I/O belum selesai maka selama beberapa detik atau menit tersebut state dari proses mysql_query() bisa dibilang idle atau tidak akan melakukan apa-apa. 
+Sebelum proses I/O selesai maka selama beberapa detik atau menit tersebut state dari proses `mysql_query()` bisa dibilang idle atau tidak melakukan apa-apa. 
 
-  Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menghandle request ini ? penyelesaiannya sekarang yaitu dengan memakai pendekatan proses multithread.    
+Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menangani request ini ?..penyelesaiannya yaitu dengan memakai pendekatan proses multithread.    
 
 
 
