@@ -103,16 +103,38 @@ Sebelum proses I/O selesai maka selama beberapa detik atau menit tersebut state 
 
 Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menangani request ini ?..penyelesaiannya yaitu dengan memakai pendekatan proses `multithread`. Melalui pendekatan ini tiap koneksi yang terjadi karena akan ditangani oleh `thread`. Thread disini bisa dikatakan sebagai task yang dijalankan oleh prosesor komputer. Sepertinya permasalahan I/O yang terblok terselesaikan dengan pendekatan metode ini tetapi dengan bertambahnya koneksi yang terjadi maka `thread` akan semakin banyak sehingga prosesor akan semakin terbebani, belum lagi untuk switching antar thread menyebabkan konsumsi memory (RAM) yang cukup besar. 
 
-Berikut contoh benchmark antara web server Apache dan Nginx (server HTTP seperti halnya Apache hanya saja Nginx memakai metode asinkron I/O dan event loop yang mirip Node.js). Gambar ini diambil dari [goo.gl/pvLL4](http://goo.gl/pvLL4)
+Berikut contoh benchmark antara web server Apache dan Nginx (server HTTP seperti halnya Apache hanya saja Nginx memakai sistem asinkron I/O dan event yang mirip Node.js). Gambar ini diambil dari [goo.gl/pvLL4](http://goo.gl/pvLL4)
 
 
 ![apache-vs-nginx-reqs-sec](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/nginx-apache-reqs-sec.png) 
 
 
-Bisa dilihat bahwa Nginx bisa menangani request yang jauh lebih banyak daripada web server Apache tetapi Nginx lebih efisien dalam penggunaan resource (RAM, Prosesor, etc). 
+Bisa dilihat bahwa Nginx bisa menangani request yang jauh lebih banyak daripada web server Apache pada jumlah koneksi bersama yang semakin naik. 
 
 
 ###Javascript & Node.js
+
+Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron perhatikan kode Javascript berikut 
+
+
+```
+var fs = require('fs');
+	
+fs.readFile('./resource.json',function(err, data){
+	if(err) throw err;
+	console.log(JSON.parse(data));
+});
+
+console.log('Selanjutnya...');
+
+```
+
+`readFile()` akan membaca membaca isi dari file `resource.json` secara asinkron yang artinya  proses eksekusi program tidak akan menunggu pembacaan file `resource.json` sampai selesai tetapi akan tetap menjalankan kode Javascript selanjutnya yaitu `console.log('Selanjutnya...')`. Lihat apa yang terjadi jika kode javascript diatas dijalankan
+
+
+![belajar-asinkron-nodejs](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/belajar-asinkron-nodejs.png)
+
+
 
 
 
