@@ -10,7 +10,8 @@ Daftar Isi:
 + Server HTTP Dasar
 + Menyediakan File Statis
 + Memproses Data Form HTML
-+ ...
++ Express - Framework Aplikasi Web
++ Picture Uploader (Bonus)
 
 
 Pengenalan
@@ -114,7 +115,7 @@ Bisa dilihat bahwa Nginx bisa menangani request yang jauh lebih banyak daripada 
 
 ###Javascript & Node.js
 
-Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron perhatikan kode Javascript berikut 
+Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron perhatikan kode Javascript pada Node.js berikut 
 
 
 ```
@@ -134,6 +135,8 @@ console.log('Selanjutnya...');
 
 ![belajar-asinkron-nodejs](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/belajar-asinkron-nodejs.png)
 
+
+Jika proses pembacaan file `resource.json` selesai maka fungsi callback pada `readFile()` akan di panggil dan jika tidak terjadi error maka data akan ditampilkan pada console.
 
 
 
