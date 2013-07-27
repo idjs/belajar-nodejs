@@ -10,6 +10,7 @@ Daftar Isi:
 + Server HTTP Dasar
 + Menyediakan File Statis
 + Memproses Data Form HTML
++ NPM
 + Express - Framework Aplikasi Web
 + Picture Uploader (Bonus)
 
