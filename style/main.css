@@ -28,3 +28,20 @@
 .paragraph {
     text-align: justify;
 }
+
+/* code styling ala github flavor*/
+p code {
+    margin: 0 2px;
+    padding: 0px 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+}
+/* code styling ala github flavor*/
+code {
+    margin: 0 2px;
+    padding: 0px 5px;
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+}

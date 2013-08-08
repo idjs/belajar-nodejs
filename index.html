@@ -40,12 +40,19 @@
     <!-- Content -->
     <div class="sixteen columns daftar-isi" >
         <ul>
-            <li><a href="#pengenlan">Pengenalan</a></li>
-
+            <h3>Daftar isi:</h3>
+            <li><a href='#pengenalan'>Pengenalan</a></li>
+            <li><a href='#asioe'>Asinkron I/O &amp; Event</a></li>
+            <li><a href='#shtd'>Server HTTP Dasar</a></li>
+            <li>Menyediakan File Statis</li>
+            <li>Memproses Data Form HTML</li>
+            <li>NPM</li>
+            <li>Express - Framework Aplikasi Web</li>
+            <li>Picture Uploader (Bonus)</li>
         </ul>
     </div>
     <div class="sixteen columns content">
-        <h3>Pengenalan</h3>
+        <h3 id='pengenalan'>Pengenalan</h3>
         <p class="paragraph">
             Javascript merupakan bahasa pemrograman yang lengkap hanya saja selama ini di pakai sebagai bahasa untuk
             pengembangan aplikasi web yang berjalan pada sisi client atau browser saja. Tetapi sejak ditemukannya Node.js
@@ -59,6 +66,122 @@
 
         </p>
 
+        <h3>Javascript Di Server</h3>
+        <p class="paragraph">
+            Tak terelakkan bahwa Javascript merupakan bahasa pemrograman yang paling populer. Jika anda sebagai developer pernah mengembangkan aplikasi web maka penggunaan Javascript pasti tidak terhindarkan.
+        </p>
+        <p class="paragraph">
+            Sekarang dengan berjalannya Javascript di server lalu apa keuntungan yang anda peroleh dengan mempelajari Node.js, kurang lebih seperti ini :
+        </p>
+        <ul>
+            <li style='margin-left: 15px;list-style: disc;'>
+                
+                    Pengembang hanya memakai satu bahasa untuk mengembangkan aplikasi lengkap client &amp; server sehingga mengurangi 'Learning Curve' untuk mempelajari bahasa server yang lain
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>
+                
+                    Sharing kode antara client dan server atau istilahnya code reuse.
+                
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>
+                    Javascript secara native mendukung JSON yang merupakan standar transfer data yang banyak dipakai saat ini sehingga untuk mengkonsumsi data-data dari pihak ketiga pemrosesan di Node.js akan sangat mudah sekali.
+                
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>
+                    Database NoSQL seperti MongoDB dan CouchDB mendukung langsung Javascript sehingga interfacing dengan database ini akan jauh lebih mudah.
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>
+                
+                    Node.js memakai V8 yang selalu mengikuti perkembangan standar ECMAScript, jadi tidak perlu ada kekhawatiran bahwa browser tidak akan mendukung fitur-fitur di Node.js.
+                
+            </li>
+        </ul>
+        <h3>Node.js In Action</h3>
+        <p>
+            Supaya anda lebih tertarik dalam belajar Node.js berikut beberapa website terkenal yang sudah memakai Node.js
+        </p>
+        <p><a href="http://www.myspace.com">www.myspace.com</a></p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/mypspace.png" target="_blank">
+                <img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/mypspace.png" alt="myspace" style="max-width:100%;">
+            </a>
+        </p>
+        <p><a href="http://www.yummly.com">www.yummly.com</a></p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/yummly.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/yummly.png" alt="yummly" style="max-width:100%;"></a>
+        </p>
+        <p><a href="http://www.shutterstock.com">www.shutterstock.com</a> </p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/shutterstock.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/shutterstock.png" alt="shutterstock" style="max-width:100%;"></a>
+        </p>
+        <p><a href="http://www.klout.com">www.klout.com</a></p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/klout.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/klout.png" alt="klout" style="max-width:100%;"></a>
+        </p>
+        <p><a href="http://www.geekli.st">www.geekli.st</a></p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/geeklist.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/geeklist.png" alt="geeklist" style="max-width:100%;"></a>
+        </p>
+        <p><a href="http://www.learnboost.com">www.learnboost.com</a></p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/learnboost.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/learnboost.png" alt="learnboost" style="max-width:100%;"></a>
+        </p>
+        <p>
+            Apakah masih ragu untuk memakai Node.js ?...Kalau masih penasaran apa yang membuat Node.js berbeda dari backend pada umumnya, silahkan dilanjutkan membaca <img class="emoji" title=":smile:" alt=":smile:" src="https://github.global.ssl.fastly.net/images/icons/emoji/smile.png" height="20" width="20" align="absmiddle">
+        </p>
+        <h2 id='asioe'>Asinkron I/O &amp; Event</h2>
+        <p>
+            Tidak seperti kebanyakan bahasa backend lainnya operasi fungsi di javascript lebih bersifat <code>asinkron</code> dan banyak menggunakan <code>event</code> demikian juga dengan Node.js. Sebelum penjelasan lebih lanjut mari kita lihat terlebih dahulu tentang metode <code>sinkron</code> seperti yang dipakai pada PHP dengan web server Apache.
+        </p>
+        <h2 id='shtd'>PHP &amp; Server HTTP Apache</h2>
+        <p>
+            Mari kita lihat contoh berikut yaitu operasi fungsi akses ke database MySQL oleh PHP yang dilakukan secara sinkron
+        </p>
+        <script src="https://gist.github.com/peeyek/6180626.js"></script>
+        <p>
+            pengambilan data oleh <code>mysql_query()</code> diatas akan dijalankan dan operasi berikutnya <code>print_r()</code> akan diblok atau tidak akan berjalan sebelum akses ke database selesai. Yang perlu menjadi perhatian disini yaitu proses Input Output atau I/O akses ke database oleh <code>mysql_query()</code> dapat memakan waktu yang relatif mungkin beberapa detik atau menit tergantung dari waktu latensi dari I/O. Waktu latensi ini tergantung dari banyak hal seperti
+        </p>
+        <ul>
+            <li style='margin-left: 15px;list-style: disc;'>
+                Query database lambat akibat banyak yang mengakses
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>
+                Kualitas jaringan akses ke database jelek
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>
+                Proses baca tulis ke disk komputer database yang butuh waktu
+            </li>
+            <li style='margin-left: 15px;list-style: disc;'>...</li>
+        </ul>
+        <p>
+            Sebelum proses I/O selesai maka selama beberapa detik atau menit tersebut state dari proses <code>mysql_query()</code> bisa dibilang idle atau tidak melakukan apa-apa.
+        </p>
+        <p>
+            Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menangani request ini ?..penyelesaiannya yaitu dengan memakai pendekatan proses <code>multithread</code>. Melalui pendekatan ini tiap koneksi yang terjadi karena akan ditangani oleh <code>thread</code>. Thread disini bisa dikatakan sebagai task yang dijalankan oleh prosesor komputer. Sepertinya permasalahan I/O yang terblok terselesaikan dengan pendekatan metode ini tetapi dengan bertambahnya koneksi yang terjadi maka <code>thread</code> akan semakin banyak sehingga prosesor akan semakin terbebani, belum lagi untuk switching antar thread menyebabkan konsumsi memory (RAM) yang cukup besar.
+        </p>
+        <p>
+            Berikut contoh benchmark antara web server Apache dan Nginx (server HTTP seperti halnya Apache hanya saja Nginx memakai sistem asinkron I/O dan event yang mirip Node.js). Gambar ini diambil dari <a href="http://goo.gl/pvLL4">goo.gl/pvLL4</a>
+        </p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/nginx-apache-reqs-sec.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/nginx-apache-reqs-sec.png" alt="apache-vs-nginx-reqs-sec" style="max-width:100%;"></a>
+        </p>
+        <p>
+            Bisa dilihat bahwa Nginx bisa menangani request yang jauh lebih banyak daripada web server Apache pada jumlah koneksi bersama yang semakin naik.
+        </p>
+        <h3>Javascript &amp; Node.js</h3>
+        <p>
+            Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron perhatikan kode Javascript pada Node.js berikut 
+        </p>
+        <script src="https://gist.github.com/peeyek/6180637.js"></script>
+        <p>
+            <code>readFile()</code> akan membaca membaca isi dari file <code>resource.json</code> secara asinkron yang artinya  proses eksekusi program tidak akan menunggu pembacaan file <code>resource.json</code> sampai selesai tetapi akan tetap menjalankan kode Javascript selanjutnya yaitu <code>console.log('Selanjutnya...')</code>. Lihat apa yang terjadi jika kode javascript diatas dijalankan
+        </p>
+        <p>
+            <a href="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/belajar-asinkron-nodejs.png" target="_blank"><img src="https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/belajar-asinkron-nodejs.png" alt="belajar-asinkron-nodejs" style="max-width:100%;"></a>
+        </p>
+        <p>
+            Jika proses pembacaan file <code>resource.json</code> selesai maka fungsi callback pada <code>readFile()</code> akan di panggil dan jika tidak terjadi error maka data akan ditampilkan pada console.
+        </p>
     </div>
 </div>
 
