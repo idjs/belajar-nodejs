@@ -214,7 +214,8 @@ function(req, res){
 
 ```
 
-Paket http Node.js memberikan keleluasan bagi developer untuk membangun server tingkat rendah. Bahkan mudah saja kalau harus men-setting nilai field header dari [HTTP](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields). Seperti pada contoh diatas agar respon dari request diperlakukan sebagai HTML maka nilai field `Content-Type` harus berupa `text/html`. Setting ini bisa dilakukan melalui metode `writeHead()`.
+Paket http Node.js memberikan keleluasan bagi developer untuk membangun server tingkat rendah. Bahkan mudah saja kalau harus men-setting nilai field header dari [HTTP](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields). Seperti pada contoh diatas agar respon dari request diperlakukan sebagai HTML oleh browser maka nilai field `Content-Type` harus berupa `text/html`. Setting ini bisa dilakukan melalui metode [`writeHead()`](http://nodejs.org/api/http.html#http_response_writehead_statuscode_reasonphrase_headers), `res.setHeader(field, value)`, `res.getHeader(field, value)`, `res.removeHeader(field)`.
+
 
 ###Run Server Node.js
 
