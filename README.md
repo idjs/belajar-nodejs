@@ -147,8 +147,9 @@ Campuran teknologi antara event driven dan proses asinkron ini memungkinkan pemb
 Server HTTP Dasar
 ----------------- 
 
-Penggunaan Node.js yang revolusioner yaitu sebagai server. Yup...mungkin kita terbiasa memakai server seperti Apache - PHP, Nginx - PHP, Java - Tomcat - Apache atau IIS - ASP.NET sebagai pemroses data di sisi server, tetapi sekarang semua itu bisa tergantikan dengan memakai JavaScript - Node.js!. Lihat contoh dasar dari server Node.js berikut
+Penggunaan Node.js yang revolusioner yaitu sebagai server. Yup...mungkin kita terbiasa memakai server seperti Apache - PHP, Nginx - PHP, Java - Tomcat - Apache atau IIS - ASP.NET sebagai pemroses data di sisi server, tetapi sekarang semua itu bisa tergantikan dengan memakai JavaScript - Node.js!. Lihat contoh dasar dari server Node.js berikut (kode sumber pada direktori code pada repositori ini)
 
+[`server-http.js`](https://raw.github.com/idjs/belajar-nodejs/gh-pages/code/server-http.js)
 
 ```
 var http = require('http'),
@@ -181,6 +182,8 @@ var server = http.createServer([requestListener])
 
 Tiap request yang terjadi akan ditangani oleh fungsi callback `requestListener`. Cara kerja callback ini hampir sama dengan ketika kita menekan tombol button html yang mempunyai atribut event `onclick`, jika ditekan maka fungsi yang teregistrasi oleh event `onclick` yaitu `clickHandler(event)` akan dijalankan. 
 
+[`onclick-button.html`](https://raw.github.com/idjs/belajar-nodejs/gh-pages/code/onclick-button.html)
+
 ```
 <script>
 	function clickHandler(event){
@@ -211,6 +214,20 @@ function(req, res){
 
 ```
 
+Paket http Node.js memberikan keleluasan bagi developer untuk membangun server tingkat rendah. Bahkan mudah saja kalau harus men-setting nilai field header dari [HTTP](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields). Seperti pada contoh diatas agar respon dari request diperlakukan sebagai HTML maka nilai field `Content-Type` harus berupa `text/html`. Setting ini bisa dilakukan melalui metode `writeHead()`.
+
+###Run Server Node.js
+
+Untuk menjalankan server Node.js ketik perintah berikut
+
+```
+$ node server-http.js
+Port 3400 : Node.js Server...
+
+```
+
+Buka browser (chrome) dan buka url `http://localhost:3500` kemudian ketik `CTRL+SHIFT+I` untuk membuka Chrome Dev Tool, dengan tool ini bisa dilihat respon header dari HTTP dimana beberapa fieldnya telah diset melalui kode di server Node.js (lingkaran merah pada screenshot dibawah ini)
 
 
+![server-response-dev-tool](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/server-response-dev-tool.png)
 
