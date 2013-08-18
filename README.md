@@ -137,11 +137,79 @@ console.log('Selanjutnya...');
 ![belajar-asinkron-nodejs](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/belajar-asinkron-nodejs.png)
 
 
-Jika proses pembacaan file `resource.json` selesai maka fungsi callback pada `readFile()` akan di panggil dan jika tidak terjadi error maka data akan ditampilkan pada console.
+Jika proses pembacaan file `resource.json` selesai maka fungsi callback pada `readFile()` akan di jalankan dan hasilnya akan ditampilkan pada console.
+
+Lalu bagaimana platform Node.js mengetahui kalau suatu proses itu telah selesai atau tidak ?...jawabannya adalah [Event Loop](http://en.wikipedia.org/wiki/Event_loop). Event - event yang terjadi karena proses asinkron seperti pada fungsi `fs.readFile()` akan ditangani oleh Event Loop ini.
+
+Campuran teknologi antara event driven dan proses asinkron ini memungkinkan pembuatan aplikasi dengan penggunaan data secara real-time dan masif. Sifat komunikasi Node.js I/O yang ringan dan bisa menangani user secara bersamaan dalam jumlah relatif besar tetapi tetap menjaga state dari koneksi supaya tetap terbuka dan dengan penggunaan memori yang cukup kecil memungkinkan pengembangan aplikasi dengan penggunaan data yang besar dan kolaboratif...Yeah, Node.js FTW! :metal:
 
 
+Server HTTP Dasar
+----------------- 
+
+Penggunaan Node.js yang revolusioner yaitu sebagai server. Yup...mungkin kita terbiasa memakai server seperti Apache - PHP, Nginx - PHP, Java - Tomcat - Apache atau IIS - ASP.NET sebagai pemroses data di sisi server, tetapi sekarang semua itu bisa tergantikan dengan memakai JavaScript - Node.js!. Lihat contoh dasar dari server Node.js berikut
 
 
+```
+var http = require('http'),
+	PORT = 3400;
+
+var server = http.createServer(function(req, res){
+	var body = "<pre>Haruskah belajar Node.js?</pre><p><h3>...Yo Mesto!</h3></p>"
+	res.writeHead(200, {
+		'Content-Length':body.length,
+		'Content-Type':'text/html',
+		'Pesan-Header':'Pengenalan Node.js'
+	});
+
+	res.write(body);
+	res.end();
+});
+
+server.listen(PORT);
+
+console.log("Port "+port+" : Node.js Server...");
+
+```
+
+Paket [http](http://nodejs.org/api/http.html#http_http) merupakan paket bawaan dari platform Node.js yang mendukung penggunaan fitur-fitur protokol HTTP. Object `server` merupakan object yang di kembalikan dari fungsi `createServer()` yang bisa dikatakan sebagai objek web server.
+
+```
+var server = http.createServer([requestListener])
+
+```
+
+Tiap request yang terjadi akan ditangani oleh fungsi callback `requestListener`. Cara kerja callback ini hampir sama dengan ketika kita menekan tombol button html yang mempunyai atribut event `onclick`, jika ditekan maka fungsi yang teregistrasi oleh event `onclick` yaitu `clickHandler(event)` akan dijalankan. 
+
+```
+<script>
+	function clickHandler(event){
+		console.log(event.target.innerHTML+" Terus!");
+	}
+</script>
+
+<button onclick="clickHandler(event)">TEKAN</button>
+
+```
+
+Demikian juga dengan callback `requestListener` pada object `server` ini jika ada request maka `requestListener` seperti dibawah ini akan dijalankan
+
+
+```
+
+function(req, res){
+	var body = "<pre>Haruskah belajar Node.js?</pre><p><h3>...Yo Mesto!</h3></p>"
+	res.writeHead(200, {
+		'Content-Length':body.length,
+		'Content-Type':'text/html',
+		'Pesan-Header':'Pengenalan Node.js'
+	});
+
+	res.write(body);
+	res.end();
+}
+
+```
 
 
 
