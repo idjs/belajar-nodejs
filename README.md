@@ -270,7 +270,9 @@ var http = require('http'),
 
 		stream.on('error', function(){
 			res.setHeader('Content-Type','text/html');
-			res.write("coba buka <a href='http://localhost:"+PORT+"/index.html'>http://localhost:"+PORT+"/index.html</a>");
+
+			var url_demo = "http://localhost:"+PORT+"/index.html";
+			res.write("coba buka <a href="+url_demo+">"+url_demo+"</a>");
 			res.end();
 		})
 
