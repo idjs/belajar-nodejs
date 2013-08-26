@@ -245,14 +245,15 @@ Agar server Node.js bisa mengirimkan file statis ke klien maka server perlu meng
 
 Sebelum dijelaskan lebih lanjut mungkin bisa dilihat atau di coba saja server file Node.js dibawah ini
 
+[`server-file.js`](https://raw.github.com/idjs/belajar-nodejs/gh-pages/code/server-file/server-file.js)
 
 ```
-
 var http = require('http'),
 	parse = require('url').parse,
 	join = require('path').join,
 	fs = require('fs'),
 	root = join(__dirname, 'www'),
+	PORT = 3300,
 
 	server = http.createServer(function(req, res){
 		var url = parse(req.url),
@@ -268,13 +269,14 @@ var http = require('http'),
 		});
 
 		stream.on('error', function(){
-			res.write("coba http://locahost:3300/index.html");
+			res.setHeader('Content-Type','text/html');
+			res.write("coba buka <a href='http://localhost:"+PORT+"/index.html'>http://localhost:"+PORT+"/index.html</a>");
 			res.end();
 		})
 
 	});
 
-server.listen(3300);
-console.log('Server File : Por 3300');
+	server.listen(PORT);
+	console.log('Port '+PORT+': Server File ');
 
 ```
