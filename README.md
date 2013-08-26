@@ -236,5 +236,45 @@ Buka browser (chrome) dan buka url `http://localhost:3400` kemudian ketik `CTRL+
 
 
 
+Menyediakan File Statis
+-----------------------
+
+Aplikasi web memerlukan file - file statis seperti CSS, font dan gambar atau file - file library JavaScript agar aplikasi web bekerja sebagaimana mestinya. File - file ini sengaja dipisahkan agar terstruktur dan secara best practice file - file ini memang harus dipisahkan. Beberapa keuntungan yang didapatkan yaitu waktu loading awal dari aplikasi web yang relatif lebih cepat dan kemudahan dalam maintenance.
+
+Agar server Node.js bisa mengirimkan file statis ke klien maka server perlu mengetahui `path` atau tempat dimana file tersebut berada. Node.js bisa mengirimkan file tersebut secara streaming melalui fungsi [`fs.createReadStream()`](http://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options). 
+
+Sebelum dijelaskan lebih lanjut mungkin bisa dilihat atau di coba saja server file Node.js dibawah ini
 
 
+```
+
+var http = require('http'),
+	parse = require('url').parse,
+	join = require('path').join,
+	fs = require('fs'),
+	root = join(__dirname, 'www'),
+
+	server = http.createServer(function(req, res){
+		var url = parse(req.url),
+			path = join(root, url.pathname),
+			stream = fs.createReadStream(path);
+
+		stream.on('data', function(bagian){
+			res.write(bagian);
+		});
+
+		stream.on('end', function(){
+			res.end();
+		});
+
+		stream.on('error', function(){
+			res.write("coba http://locahost:3300/index.html");
+			res.end();
+		})
+
+	});
+
+server.listen(3300);
+console.log('Server File : Por 3300');
+
+```
