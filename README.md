@@ -282,3 +282,21 @@ var http = require('http'),
 	console.log('Port '+PORT+': Server File ');
 
 ```
+
+Berikut sedikit penjelasan dari kode diatas
+
+- [`__dirname`](http://nodejs.org/api/globals.html#globals_dirname) merupakan variabel global yang disediakan oleh Node.js yang berisi path direktori dari file yang sedang aktif mengeksekusi `__dirname`. 
+- `root` merupakan direktori root atau referensi tempat dimana file-file yang akan dikirimkan oleh server Node.js. Pada server diatas direktori root di setting pada direktori `www`.
+- `path` adalah path file yang bisa didapatkan dengan menggabungkan path direktori root dan `pathname`. `pathname` yang dimaksud di sini misalnya jika URL yang diminta yaitu `http://localhost:3300/index.html` maka `pathname` adalah `/index.html`. Nilai variabel `path` dihasilkan dengan memakai fungsi `join()`.  
+
+```
+var path = join(root, url.pathname)
+```
+
+- `stream` yang di kembalikan oleh fungsi `fs.createReadStream()` merupakan class [`stream.Readable`](http://nodejs.org/api/stream.html#stream_class_stream_readable). Objek `stream` ini mengeluarkan data secara streaming untuk di olah lebih lanjut. Perlu menjadi catatan bahwa `stream.Readable` tidak akan mengeluarkan data jikalau tidak di kehendaki. Nah...cara untuk mendeteksi data streaming ini sudah siap di konsumsi atau belum adalah melalui event.
+
+
+
+
+
+
