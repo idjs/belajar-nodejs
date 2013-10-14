@@ -12,7 +12,7 @@ Daftar Isi:
 + Memproses Data Form HTML
 + NPM
 + Express - Framework Aplikasi Web
-+ Picture Uploader (Bonus)
++ Aplikasi Picture Uploader
 
 
 Pengenalan
@@ -96,14 +96,16 @@ print_r($hasil);
 
 pengambilan data oleh `mysql_query()` diatas akan dijalankan dan operasi berikutnya `print_r()` akan diblok atau tidak akan berjalan sebelum akses ke database selesai. Yang perlu menjadi perhatian disini yaitu proses Input Output atau I/O akses ke database oleh `mysql_query()` dapat memakan waktu yang relatif mungkin beberapa detik atau menit tergantung dari waktu latensi dari I/O. Waktu latensi ini tergantung dari banyak hal seperti 
 
-+ Query database lambat akibat banyak yang mengakses
-+ Kualitas jaringan akses ke database jelek
-+ Proses baca tulis ke disk komputer database yang butuh waktu
++ Query database lambat akibat banyak pengguna yang mengakses
++ Kualitas jaringan untuk akses ke database jelek
++ Proses baca tulis ke disk komputer database yang membutuhkan waktu
 + ...
 
 Sebelum proses I/O selesai maka selama beberapa detik atau menit tersebut state dari proses `mysql_query()` bisa dibilang idle atau tidak melakukan apa-apa. 
 
-Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menangani request ini ?..penyelesaiannya yaitu dengan memakai pendekatan proses `multithread`. Melalui pendekatan ini tiap koneksi yang terjadi karena akan ditangani oleh `thread`. Thread disini bisa dikatakan sebagai task yang dijalankan oleh prosesor komputer. Sepertinya permasalahan I/O yang terblok terselesaikan dengan pendekatan metode ini tetapi dengan bertambahnya koneksi yang terjadi maka `thread` akan semakin banyak sehingga prosesor akan semakin terbebani, belum lagi untuk switching antar thread menyebabkan konsumsi memory (RAM) yang cukup besar. 
+Lalu jika proses I/O di blok bagaimana jika ada request lagi dari user ? apa yang akan dilakukan oleh server untuk menangani request ini ?..penyelesaiannya yaitu dengan memakai pendekatan proses `multithread`. Melalui pendekatan ini tiap koneksi yang terjadi akan ditangani oleh `thread`. Thread disini bisa dikatakan sebagai task yang dijalankan oleh prosesor komputer. 
+
+Sepertinya permasalahan I/O yang terblok terselesaikan dengan pendekatan metode ini tetapi dengan bertambahnya koneksi yang terjadi maka `thread` akan semakin banyak sehingga prosesor akan semakin terbebani, belum lagi untuk switching antar thread menyebabkan konsumsi memory (RAM) komputer yang cukup besar. 
 
 Berikut contoh benchmark antara web server Apache dan Nginx (server HTTP seperti halnya Apache hanya saja Nginx memakai sistem asinkron I/O dan event yang mirip Node.js). Gambar ini diambil dari [goo.gl/pvLL4](http://goo.gl/pvLL4)
 
@@ -116,7 +118,7 @@ Bisa dilihat bahwa Nginx bisa menangani request yang jauh lebih banyak daripada 
 
 ###Javascript & Node.js
 
-Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron perhatikan kode Javascript pada Node.js berikut 
+Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron bisa lebih mudah dengan memakai pendekatan contoh kode. Perhatikan kode Javascript pada Node.js berikut 
 
 
 ```
@@ -131,17 +133,17 @@ console.log('Selanjutnya...');
 
 ```
 
-`readFile()` akan membaca membaca isi dari file `resource.json` secara asinkron yang artinya  proses eksekusi program tidak akan menunggu pembacaan file `resource.json` sampai selesai tetapi akan tetap menjalankan kode Javascript selanjutnya yaitu `console.log('Selanjutnya...')`. Lihat apa yang terjadi jika kode javascript diatas dijalankan
+fungsi `readFile()` akan membaca membaca isi dari file `resource.json` secara asinkron yang artinya  proses eksekusi program tidak akan menunggu pembacaan file `resource.json` sampai selesai tetapi program akan tetap menjalankan kode Javascript selanjutnya yaitu `console.log('Selanjutnya...')`. Sekarng lihat apa yang terjadi jika kode javascript diatas dijalankan
 
 
 ![belajar-asinkron-nodejs](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/belajar-asinkron-nodejs.png)
 
 
-Jika proses pembacaan file `resource.json` selesai maka fungsi callback pada `readFile()` akan di jalankan dan hasilnya akan ditampilkan pada console.
+Jika proses pembacaan file `resource.json` selesai maka fungsi callback pada `readFile()` akan di jalankan dan hasilnya akan ditampilkan pada console. Yah, fungsi callback merupakan konsep yang penting dalam proses I/O yang asinkron karena melalui fungsi callback ini data data yang dikembalikan oleh proses I/O akan di proses.
 
-Lalu bagaimana platform Node.js mengetahui kalau suatu proses itu telah selesai atau tidak ?...jawabannya adalah [Event Loop](http://en.wikipedia.org/wiki/Event_loop). Event - event yang terjadi karena proses asinkron seperti pada fungsi `fs.readFile()` akan ditangani oleh Event Loop ini.
+Lalu bagaimana platform Node.js mengetahui kalau suatu proses itu telah selesai atau tidak ?...jawabannya adalah [Event Loop](http://en.wikipedia.org/wiki/Event_loop). Event - event yang terjadi karena proses asinkron seperti pada fungsi `fs.readFile()` akan ditangani oleh yang namanya Event Loop ini.
 
-Campuran teknologi antara event driven dan proses asinkron ini memungkinkan pembuatan aplikasi dengan penggunaan data secara real-time dan masif. Sifat komunikasi Node.js I/O yang ringan dan bisa menangani user secara bersamaan dalam jumlah relatif besar tetapi tetap menjaga state dari koneksi supaya tetap terbuka dan dengan penggunaan memori yang cukup kecil memungkinkan pengembangan aplikasi dengan penggunaan data yang besar dan kolaboratif...Yeah, Node.js FTW! :metal:
+Campuran teknologi antara event driven dan proses asinkron ini memungkinkan pembuatan aplikasi dengan penggunaan data secara masif dan real-time. Sifat komunikasi Node.js I/O yang ringan dan bisa menangani user secara bersamaan dalam jumlah relatif besar tetapi tetap menjaga state dari koneksi supaya tetap terbuka dan dengan penggunaan memori yang cukup kecil memungkinkan pengembangan aplikasi dengan penggunaan data yang besar dan kolaboratif...Yeah, Node.js FTW! :metal:
 
 
 Server HTTP Dasar
@@ -173,7 +175,7 @@ console.log("Port "+PORT+" : Node.js Server...");
 
 ```
 
-Paket [http](http://nodejs.org/api/http.html#http_http) merupakan paket bawaan dari platform Node.js yang mendukung penggunaan fitur-fitur protokol HTTP. Object `server` merupakan object yang di kembalikan dari fungsi `createServer()` yang bisa dikatakan sebagai objek web server.
+Paket [http](http://nodejs.org/api/http.html#http_http) merupakan paket bawaan dari platform Node.js yang mendukung penggunaan fitur-fitur protokol HTTP. Object `server` merupakan object yang di kembalikan dari fungsi `createServer()`.
 
 ```
 var server = http.createServer([requestListener])
@@ -195,7 +197,7 @@ Tiap request yang terjadi akan ditangani oleh fungsi callback `requestListener`.
 
 ```
 
-Demikian juga dengan callback `requestListener` pada object `server` ini jika ada request maka `requestListener` seperti dibawah ini akan dijalankan
+Sama halnya dengan callback `requestListener` pada object `server` ini jika ada request maka `requestListener` akan dijalankan
 
 
 ```
@@ -214,12 +216,16 @@ function(req, res){
 
 ```
 
-Paket http Node.js memberikan keleluasan bagi developer untuk membangun server tingkat rendah. Bahkan mudah saja kalau harus men-setting nilai field header dari [HTTP](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields). Seperti pada contoh diatas agar respon dari request diperlakukan sebagai HTML oleh browser maka nilai field `Content-Type` harus berupa `text/html`. Setting ini bisa dilakukan melalui metode [`writeHead()`](http://nodejs.org/api/http.html#http_response_writehead_statuscode_reasonphrase_headers), `res.setHeader(field, value)` dan beberapa metode lainnya disediakan untuk membaca header seperti `res.getHeader(field, value)` dan menghapus field header tertentu dengan memakai fungsi `res.removeHeader(field)`. Perlu diingat bahwa setting header dilakukan sebelum fungsi `res.write()` atau `res.end()` di jalankan karena jika `res.write()` dijalankan tetapi kemudian ada perubahan field header maka perubahan ini akan diabaikan.
+Paket http Node.js memberikan keleluasan bagi developer untuk membangun server tingkat rendah. Bahkan mudah saja kalau harus men-setting nilai field header dari [HTTP](http://en.wikipedia.org/wiki/List_of_HTTP_header_fields). 
+
+Seperti pada contoh diatas agar respon dari request diperlakukan sebagai HTML oleh browser maka nilai field `Content-Type` harus berupa `text/html`. Setting ini bisa dilakukan melalui metode [`writeHead()`](http://nodejs.org/api/http.html#http_response_writehead_statuscode_reasonphrase_headers), `res.setHeader(field, value)` dan beberapa metode lainnya. 
+
+Untuk membaca header bisa dipakai fungsi seperti `res.getHeader(field, value)` dan untuk menghapus field header tertentu dengan memakai fungsi `res.removeHeader(field)`. Perlu diingat bahwa setting header dilakukan sebelum fungsi `res.write()` atau `res.end()` di jalankan karena jika `res.write()` dijalankan tetapi kemudian ada perubahan field header maka perubahan ini akan diabaikan.
 
 Satu hal lagi yaitu tentang [kode status dari respon HTTP](http://en.wikipedia.org/wiki/List_of_HTTP_status_codes). Kode status ini bisa disetting selain 200 (request http sukses), misalnya bila diperlukan halaman error dengan kode status 404. 
 
 
-###Run Server Node.js
+###Menjalankan Server Node.js
 
 Untuk menjalankan server Node.js ketik perintah berikut
 
@@ -229,7 +235,7 @@ Port 3400 : Node.js Server...
 
 ```
 
-Buka browser (chrome) dan buka url `http://localhost:3400` kemudian ketik `CTRL+SHIFT+I` untuk membuka Chrome Dev Tool, dengan tool ini bisa dilihat respon header dari HTTP dimana beberapa fieldnya telah diset melalui kode di server Node.js (lingkaran merah pada screenshot dibawah ini)
+Buka browser (chrome) dan buka url `http://localhost:3400` kemudian ketik `CTRL+SHIFT+I` untuk membuka Chrome Dev Tool, dengan tool ini bisa dilihat respon header dari HTTP dimana beberapa fieldnya telah diset sebelumnya (lingkaran merah pada screenshot dibawah ini)
 
 
 ![server-response-dev-tool](https://raw.github.com/idjs/belajar-nodejs/gh-pages/images/server-response-dev-tool.png)
@@ -239,11 +245,11 @@ Buka browser (chrome) dan buka url `http://localhost:3400` kemudian ketik `CTRL+
 Menyediakan File Statis
 -----------------------
 
-Aplikasi web memerlukan file - file statis seperti CSS, font dan gambar atau file - file library JavaScript agar aplikasi web bekerja sebagaimana mestinya. File - file ini sengaja dipisahkan agar terstruktur dan secara best practice file - file ini memang harus dipisahkan. Beberapa keuntungan yang didapatkan yaitu waktu loading awal dari aplikasi web yang relatif lebih cepat dan kemudahan dalam maintenance.
+Aplikasi web memerlukan file - file statis seperti CSS, font dan gambar atau file - file library JavaScript agar aplikasi web bekerja sebagaimana mestinya. File - file ini sengaja dipisahkan agar terstruktur dan secara *best practices* file - file ini memang harus dipisahkan. Lalu bagaimana caranya Node.js bisa menyediakan file - file ini ?...ok mari kita buat server Node.js untuk menyediakan file statis. 
 
-Agar server Node.js bisa mengirimkan file statis ke klien maka server perlu mengetahui `path` atau tempat dimana file tersebut berada. Node.js bisa mengirimkan file tersebut secara streaming melalui fungsi [`fs.createReadStream()`](http://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options). 
+Agar server Node.js bisa mengirimkan file statis ke klien maka server perlu mengetahui `path` atau tempat dimana file tersebut berada. 
 
-Sebelum dijelaskan lebih lanjut mungkin bisa dilihat atau di coba saja server file Node.js dibawah ini
+Node.js bisa mengirimkan file tersebut secara streaming melalui fungsi [`fs.createReadStream()`](http://nodejs.org/api/fs.html#fs_fs_createreadstream_path_options). Sebelum dijelaskan lebih lanjut mungkin bisa dilihat atau di coba saja server file Node.js dibawah ini
 
 [`server-file.js`](https://raw.github.com/idjs/belajar-nodejs/gh-pages/code/server-file/server-file.js)
 
@@ -286,7 +292,7 @@ var http = require('http'),
 Berikut sedikit penjelasan dari kode diatas
 
 - [`__dirname`](http://nodejs.org/api/globals.html#globals_dirname) merupakan variabel global yang disediakan oleh Node.js yang berisi path direktori dari file yang sedang aktif mengeksekusi `__dirname`. 
-- `root` merupakan direktori root atau referensi tempat dimana file-file yang akan dikirimkan oleh server Node.js. Pada server diatas direktori root di setting pada direktori `www`.
+- `root` merupakan direktori root atau referensi tempat dimana file-file yang akan dikirimkan oleh server Node.js. Pada kode server diatas direktori root di setting pada direktori `www`.
 - `path` adalah path file yang bisa didapatkan dengan menggabungkan path direktori root dan `pathname`. `pathname` yang dimaksud di sini misalnya jika URL yang diminta yaitu `http://localhost:3300/index.html` maka `pathname` adalah `/index.html`. Nilai variabel `path` dihasilkan dengan memakai fungsi `join()`.  
 
 ```
@@ -295,8 +301,33 @@ var path = join(root, url.pathname)
 
 - `stream` yang di kembalikan oleh fungsi `fs.createReadStream()` merupakan class [`stream.Readable`](http://nodejs.org/api/stream.html#stream_class_stream_readable). Objek `stream` ini mengeluarkan data secara streaming untuk di olah lebih lanjut. Perlu menjadi catatan bahwa `stream.Readable` tidak akan mengeluarkan data jikalau tidak di kehendaki. Nah...cara untuk mendeteksi data streaming ini sudah siap di konsumsi atau belum adalah melalui event.
 
+Event yang di dukung oleh class `stream.Readable` adalah sebagai berikut
 
+(TODO: perlu pejelasan)
 
+ - Event: `readable`
+ - Event: `data`
+ - Event: `end`
+ - Event: `error`
+ - Event: `close`
 
+(TODO: mengapa memakai stream ?)
+
+Memproses Data Form HTML
+------------------------
+
+(TODO: contoh pengambilan data dari form HTML)
+
+NPM
+---
+(TODO:)
+
+Express - Framework Aplikasi Web
+--------------------------------
+(TODO:)
+
+Aplikasi Picture Uploader
+-------------------------
+(TODO:)
 
 
