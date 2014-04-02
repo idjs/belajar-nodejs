@@ -304,15 +304,35 @@ var path = join(root, url.pathname)
 
 Event yang di dukung oleh class `stream.Readable` adalah sebagai berikut
 
- Sumber: [Node.js API Stream][1] 
 
  - Event: `readable`
  - Event: `data`
  - Event: `end`
  - Event: `error`
  - Event: `close`
+ 
 
-Stream merupakan bagian yang penting di platform Node.js 
+Mungkin anda bertanya kenapa server file statis diatas memakai stream, bukankah menyediakan file secara langsung saja sudah bisa? jawabannya memang bisa, tetapi mungkin tidak akan efisien kalau file yang akan di berikan ke client mempunyai ukuran yang besar. Coba lihat kode berikut
+
+```
+var http = require('http');
+var fs = require('fs');
+
+var server = http.createServer(function (req, res) {
+    fs.readFile(__dirname + '/data.txt', function (err, data) {
+        res.end(data);
+    });
+});
+server.listen(8000);
+
+```
+Jika file `data.txt` terlalu besar maka buffer yang digunakan oleh sistem juga besar dan konsumsi memori juga akan bertambah besar seiring semakin banyak pengguna yang mengakses file ini. 
+
+Jika anda ingin lebih banyak mendalami tentang Node.js Stream silahkan lihat resource berikut (dalam Bahasa Inggris):
+
+ 1. [Node.js API Stream][1]
+ 2. [Stream Handbook][2]
+
 
 Memproses Data Form HTML
 ------------------------
@@ -333,3 +353,4 @@ Aplikasi Picture Uploader
 
 
   [1]: http://nodejs.org/api/stream.html
+  [2]: https://github.com/substack/stream-handbook
