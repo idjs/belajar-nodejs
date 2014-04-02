@@ -2,6 +2,7 @@ Belajar Node.js
 ===============
 Maintained by Equan Pr.
 
+[![cc-by-3.0](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)
 
 Daftar Isi:
 
@@ -303,7 +304,7 @@ var path = join(root, url.pathname)
 
 Event yang di dukung oleh class `stream.Readable` adalah sebagai berikut
 
-(TODO: perlu pejelasan)
+ Sumber: [Node.js API Stream][1] 
 
  - Event: `readable`
  - Event: `data`
@@ -311,7 +312,7 @@ Event yang di dukung oleh class `stream.Readable` adalah sebagai berikut
  - Event: `error`
  - Event: `close`
 
-(TODO: mengapa memakai stream ?)
+Stream merupakan bagian yang penting di platform Node.js 
 
 Memproses Data Form HTML
 ------------------------
@@ -331,3 +332,4 @@ Aplikasi Picture Uploader
 (TODO:)
 
 
+  [1]: http://nodejs.org/api/stream.html
