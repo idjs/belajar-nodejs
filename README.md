@@ -347,7 +347,7 @@ Data yang dikirim oleh form biasanya salah satu dari dua tipe mime berikut
 
 Node.js sendiri hanya menyediakan parsing data melalui `body` dari `request` sedangkan untuk validasi atau pemrosesan data akan diserahkan kepada komunitas.
 
-## URL Encode
+### URL Encode
 
 Hanya akan dibahas untuk 2 metode HTTP yaitu `GET` dan `POST` saja. Metode `GET` untuk menampilkan form html dan `POST` untuk menangani data form yang dikirim
 
@@ -419,8 +419,17 @@ console.log('server http berjalan pada port 3003');
 
 ```
 
+Untuk mengetest `GET` dan `POST` bisa dilakukan melalui curl, browser atau melalui gui [Postman](http://www.getpostman.com/).
 
-## Multipart Data
+####GET
+
+![GET form fields](https://raw.githubusercontent.com/idjs/belajar-nodejs/gh-pages/images/get-form.png)
+
+####POST
+
+![POST](https://raw.githubusercontent.com/idjs/belajar-nodejs/gh-pages/images/post-urlencoded-data.png)
+
+### Multipart Data
 
 
 NPM
