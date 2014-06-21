@@ -1,8 +1,12 @@
 Belajar Node.js
 ===============
-Maintained by Equan Pr.
+Maintained by [Equan Pr][1].
 
 [![cc-by-3.0](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)
+
+
+> Buku ini juga tersedia di GitBook online & juga dalam format PDF, EPUB atau MOBI.
+
 
 Daftar Isi:
 
@@ -330,8 +334,8 @@ Jika file `data.txt` terlalu besar maka buffer yang digunakan oleh sistem juga b
 
 Jika anda ingin lebih banyak mendalami tentang Node.js Stream silahkan lihat resource berikut (dalam Bahasa Inggris):
 
- 1. [Node.js API Stream][1]
- 2. [Stream Handbook][2]
+ 1. [Node.js API Stream][2]
+ 2. [Stream Handbook][3]
 
 
 Memproses Data Form HTML
@@ -429,6 +433,7 @@ Untuk mengetest `GET` dan `POST` bisa dilakukan melalui curl, browser atau melal
 
 ![POST](https://raw.githubusercontent.com/idjs/belajar-nodejs/gh-pages/images/post-urlencoded-data.png)
 
+
 ### Multipart Data
 
 
@@ -445,5 +450,6 @@ Aplikasi Picture Uploader
 (TODO:)
 
 
-  [1]: http://nodejs.org/api/stream.html
-  [2]: https://github.com/substack/stream-handbook
+  [1]: http://equan.me
+  [2]: http://nodejs.org/api/stream.html
+  [3]: https://github.com/substack/stream-handbook
