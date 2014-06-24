@@ -10,12 +10,12 @@ Maintained by [Equan Pr][1].
 
 Daftar Isi:
 
-+ [Pengenalan] (##Pengenalan)
++ [Pengenalan] (#Pengenalan)
 + Asinkron I/O & Event
 + Server HTTP Dasar
 + Menyediakan File Statis
 + Memproses Data Form HTML
-+ NPM
++ Modul
 + Express - Framework Aplikasi Web
 + Aplikasi Picture Uploader
 
@@ -83,8 +83,8 @@ www.learnboost.com
 Apakah masih ragu untuk memakai Node.js ?...Kalau masih penasaran apa yang membuat Node.js berbeda dari backend pada umumnya, silahkan dilanjutkan membaca :smile:
 
 
-Asinkron I/O & Event
---------------------
+##Asinkron I/O & Event
+
 
 Tidak seperti kebanyakan bahasa backend lainnya operasi fungsi di javascript lebih bersifat `asinkron` dan banyak menggunakan `event` demikian juga dengan Node.js. Sebelum penjelasan lebih lanjut mari kita lihat terlebih dahulu tentang metode `sinkron` seperti yang dipakai pada PHP dengan web server Apache.
 
@@ -150,8 +150,7 @@ Lalu bagaimana platform Node.js mengetahui kalau suatu proses itu telah selesai 
 Campuran teknologi antara event driven dan proses asinkron ini memungkinkan pembuatan aplikasi dengan penggunaan data secara masif dan real-time. Sifat komunikasi Node.js I/O yang ringan dan bisa menangani user secara bersamaan dalam jumlah relatif besar tetapi tetap menjaga state dari koneksi supaya tetap terbuka dan dengan penggunaan memori yang cukup kecil memungkinkan pengembangan aplikasi dengan penggunaan data yang besar dan kolaboratif...Yeah, Node.js FTW! :metal:
 
 
-Server HTTP Dasar
------------------ 
+##Server HTTP Dasar
 
 Penggunaan Node.js yang revolusioner yaitu sebagai server. Yup...mungkin kita terbiasa memakai server seperti Apache - PHP, Nginx - PHP, Java - Tomcat - Apache atau IIS - ASP.NET sebagai pemroses data di sisi server, tetapi sekarang semua itu bisa tergantikan dengan memakai JavaScript - Node.js!. Lihat contoh dasar dari server Node.js berikut (kode sumber pada direktori code pada repositori ini)
 
@@ -246,8 +245,8 @@ Buka browser (chrome) dan buka url `http://localhost:3400` kemudian ketik `CTRL+
 
 
 
-Menyediakan File Statis
------------------------
+##Menyediakan File Statis
+
 
 Aplikasi web memerlukan file - file statis seperti CSS, font dan gambar atau file - file library JavaScript agar aplikasi web bekerja sebagaimana mestinya. File - file ini sengaja dipisahkan agar terstruktur dan secara *best practices* file - file ini memang harus dipisahkan. Lalu bagaimana caranya Node.js bisa menyediakan file - file ini ?...ok mari kita buat server Node.js untuk menyediakan file statis. 
 
@@ -337,8 +336,8 @@ Jika anda ingin lebih banyak mendalami tentang Node.js Stream silahkan lihat res
  2. [Stream Handbook][3]
 
 
-Memproses Data Form HTML
-------------------------
+##Memproses Data Form HTML
+
 
 Aplikasi web memperoleh data dari pengguna umumnya melalui pengisian form HTML. Contohnya seperti ketika registrasi di media sosial atau aktifitas update status di Facebook misalnya pasti akan mengisi text field dan kemudian menekan tombol submit ataupun enter agar data bisa terkirim dan diproses oleh server.
 
@@ -435,17 +434,98 @@ Untuk mengetest `GET` dan `POST` bisa dilakukan melalui curl, browser atau melal
 
 ### Multipart Data
 
+##Modul npm
 
-NPM
----
+`nice people matter`
+
+npm merupakan package manager untuk Node.js dan untuk nama `npm` bukanlah suatu singkatan. Hanya dalam waktu 2 tahun sejak di releasenya Node.js ke publik jumlah modul melesat jauh bahkan hampir menyamai modul java ataupun ruby gems.
+
+
+![modulecount npm](https://raw.githubusercontent.com/idjs/belajar-nodejs/gh-pages/images/modul-npm.png)
+
+
+Grafik diatas didapat dari http://modulecounts.com.
+
+Banyaknya push module ke repositori npm dapat diartikan adanya kepercayaan publik terhadap platform ini dan untuk kedepannya Node.js akan menjadi platform yang prospektif untuk berinvestasi.
+
+###Konsep
+
+npm memakai sistem modul [CommonJS](http://www.commonjs.org/specs/) yang cukup mudah dalam penggunaanya. Sistem modul ini akan meng-export objek JavaScript ke variabel `exports` yang bersifat global di modul tersebut.
+
+Sebagai contoh
+
+`band.js`
+
+```
+'use strict';
+
+function Band(){}
+
+Band.prototype.info = function(){
+    return 'Nama Band: '+this.name;
+}
+
+Band.prototype.add = function(name){
+    this.name = name;
+}
+
+module.exports = new Band();
+```
+
+Untuk pemakaiannya seperti di bawah ini
+
+`app.js`
+
+```
+var band = require('./band.js');
+band.add('Dewa 19');
+
+console.log(band.info);
+
+```
+
+###npmjs.org
+
+Sejak versi Node.js 0.6.3 command `npm` sudah ter-bundle dengan installer Node.js. Untuk menginstall modul npm yang anda butuhkan ketik misalnya
+
+```
+npm install express
+
+```
+
+perintah diatas akan mendownload paket `express` dari `http://npmjs.org` dan secara otomatis akan membuat directory `node_modules`.
+
+Untuk memakai modul `express` ini cukup dengan membuat file JavaScript baru di luar direktori `node_modules` dan load modul dengan keyword `require`.
+
+
+```
+var app = require('express');
+
+// kode lainnya
+
+```
+
+##Membuat Paket npm
+
+Berikut alur umum untuk membuat paket npm
+
+
+
+![alur pembuatan npm](https://raw.githubusercontent.com/idjs/belajar-nodejs/gh-pages/images/npm-flow.png)
+
+
+
+Untuk lebih jelasnya silahkan kunjungi dokumentasi untuk [developer npm](https://www.npmjs.org/doc/misc/npm-developers.html).
+
+
+
+
+##Express - Framework Aplikasi Web
+
 (TODO:)
 
-Express - Framework Aplikasi Web
---------------------------------
-(TODO:)
+##Aplikasi Picture Uploader
 
-Aplikasi Picture Uploader
--------------------------
 (TODO:)
 
 
