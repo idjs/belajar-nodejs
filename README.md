@@ -5,7 +5,8 @@ Maintained by [Equan Pr][1].
 [![cc-by-3.0](http://i.creativecommons.org/l/by/3.0/80x15.png)](http://creativecommons.org/licenses/by/3.0/)
 
 
-> Buku ini juga tersedia di GitBook online & juga dalam format PDF, EPUB atau MOBI.
+> Buku ini juga tersedia di GitBook online. Kunjungi link berikut ini untuk format PDF, EPUB atau MOBI 
+> http://junwatu.gitbooks.io/pengenalan-nodejs/
 
 
 Daftar Isi:
