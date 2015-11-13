@@ -530,6 +530,6 @@ Untuk lebih jelasnya silahkan kunjungi dokumentasi untuk [developer npm](https:/
 (TODO:)
 
 
-  [1]: http://equan.me
+  [1]: http://junwatu.github.io
   [2]: http://nodejs.org/api/stream.html
   [3]: https://github.com/substack/stream-handbook
