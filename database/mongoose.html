@@ -48,7 +48,7 @@
     <body>
         
         
-    <div class="book" data-level="8.3.2" data-chapter-title="Mongoose" data-filepath="database/mongoose.md" data-basepath=".." data-revision="Sat Nov 14 2015 05:53:52 GMT+0700 (WIB)">
+    <div class="book" data-level="8.3.2" data-chapter-title="Mongoose" data-filepath="database/mongoose.md" data-basepath=".." data-revision="Sat Nov 14 2015 19:23:36 GMT+0700 (WIB)">
     
 
 <div class="book-summary">
@@ -845,8 +845,62 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="mongoose">Mongoose</h1>
-<p>(TODO)</p>
-<p>Contoh project <a href="person_rest_api/README.md">Person REST API</a>.</p>
+<p>Seperti dikatakan sebelumnya untuk memudahkan pemodelan data di MongoDB anda bisa memakai pustaka 
+<a href="http://mongoosejs.com/" target="_blank">Mongoose</a>. Meskipun sebenarnya Mongoose memakai objek JavaScript biasa dan mendukung
+banyak metode <code>query</code> data tetapi yang paling membedakan adalah Mongoose mendukung schema type dan validasi di level schema.</p>
+<pre><code>data:{type: schemaType}
+</code></pre><h2 id="schema-type">Schema Type</h2>
+<p>Ada beberapa schema type yang didukung oleh pustaka ini yaitu</p>
+<ul>
+<li>String </li>
+<li>Number</li>
+<li>Date</li>
+<li>Boolean</li>
+<li>Buffer (untuk data binary misalnya gambar, mp3 dll.)</li>
+<li>Mixed (data dengan tipe apa saja)</li>
+<li>Array</li>
+<li>ObjectId</li>
+</ul>
+<h2 id="pemodelan-data">Pemodelan Data</h2>
+<p>Lalu bagaimana Mongoose memodel data? ambil contoh misalnya dalam pengembangan aplikasi, data yang akan 
+dipakai seperti berikut</p>
+<pre><code>var lokasiWisataKotaBatu = [{
+  nama: &apos;Batu Night Square&apos;,
+  alamat: &apos;Jl. Oro oro ombo 13, Tlekung&apos;
+  rating: 3,
+  fasilitas: [&apos;Wahana bermain&apos;,&apos;Roller coaster&apos;, &apos;Taman lampion&apos;]
+}]
+</code></pre><p>Dari data diatas dengan memakai Mongoose sangat mudah untuk diterjemahkan ke skema dan tipe data untuk tiap field</p>
+<pre><code>var lokasiWisataKotaBatuSchema = new mongoose.schema({
+  nama: String,
+  alamat: String,
+  rating: Number,
+  fasilitas: [String]
+})
+</code></pre><p>Bagaimana dengan validasi data?. Jika anda lihat field data <code>rating</code> diatas dan umumnya mempunyai nilai antara 0 - 5 dan jika secara default diberi nilai 0 maka skema <code>rating</code> akan menjadi</p>
+<pre><code>rating: {type: Number, &apos;default&apos;: 0}
+</code></pre><p>Anda juga bisa memakai key <code>required</code> untuk menandakan bahwa field data tersebut bersifat wajib ada misalnya</p>
+<pre><code>nama: {type: String, required: true} 
+</code></pre><p>Untuk lebih jelasnya silahakan lihat dokumentasi dari <a href="http://mongoosejs.com/docs/validation.html" target="_blank">Validators Mongoose</a>.</p>
+<p>Aplikasi node.js dengan database MongoDB yang memakai pustaka Mongoose dapat dikatakan mempunyai hubungan relasi satu-satu artinya 
+dengan memakai model Mongoose berarti secara langsung aplikasi akan memakai data pada MongoDB. </p>
+<p>Kalau misalnya anda bekerja dengan database relasional MySQL maka anda akan memakai bahasa SQL seperti <code>INSERT INTO table VALUES (field1=data)</code> untuk memasukkan data sedangkan seperti anda ketahui jika dengan database NoSQL untuk menyimpan model object cukup dengan memakai metode misalnya <code>model.save()</code>. Dalam Mongoose untuk memakai model yang telah mempunyai schema seperti diatas</p>
+<pre><code>var LokasiModel = mongoose.model(&apos;Lokasi&apos;, lokasiWisataKotaBatuSchema, &apos;lokasiWisataBatu&apos;)
+</code></pre><p>Kode diatas memberi arti bahwa aplikasi akan memakai model <code>Lokasi</code> dengan <strong>schema type</strong> yang telah di definisikan sebelumnya yaitu
+<code>lokasiWisataKotaBatuSchema</code> dan model ini akan di simpan pada koleksi data di MongoDB dengan nama koleksi adalah <code>lokasiWisataBatu</code>.</p>
+<p>Untuk memakai model <code>Lokasi</code> caranya adalah dengan menciptakan <code>instance</code> dari model tersebut</p>
+<pre><code>var lokasiModel = new LokasiModel()
+lokasiModel.nama = &apos;Museum Angkut&apos;
+lokasiModel.alamat = &apos;Jl. Kembar 11&apos;
+lokasiModel.rating = 5
+lokasiModel.fasilitas = [&apos;Restoran&apos;, &apos;Parkir luas&apos;]
+</code></pre><p>Kemudian untuk menyimpan data tersebut ke dalam database MongoDB</p>
+<pre><code>lokasiModel.save(function(err){
+  if(!err) console.log(&apos;Data Disimpan!&apos;)
+})
+</code></pre><p>Cukup mudah bukan dan memang pustaka ini bertujuan untuk memudahkan developer dalam pemodelan data terutama jika data yang akan dimodel mempunyai struktur yang rumit misalnya nested document. Untuk lebih lengkapnya silahkan anda mengunjungi situs resmi <a href="http://mongoosejs.com/" target="_blank">mongoosejs.com</a>. </p>
+<h2 id="projek">Projek</h2>
+<p>Bagi anda yang sudah mengerti gambaran umum dari pustaka Mongoose ini silahkan mengutak atik contoh projek sederhana yang memakai framework ExpressJS dan Mongoose, <a href="person_rest_api/README.md">Person REST API</a>.</p>
 
                     
                     </section>
