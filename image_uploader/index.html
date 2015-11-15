@@ -48,7 +48,7 @@
     <body>
         
         
-    <div class="book" data-level="12" data-chapter-title="Image Uploader" data-filepath="image_uploader/README.md" data-basepath=".." data-revision="Sat Nov 14 2015 05:53:52 GMT+0700 (WIB)">
+    <div class="book" data-level="12" data-chapter-title="Image Uploader" data-filepath="image_uploader/README.md" data-basepath=".." data-revision="Sun Nov 15 2015 17:17:13 GMT+0700 (WIB)">
     
 
 <div class="book-summary">
@@ -845,6 +845,106 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="image-uploader">Image Uploader</h1>
+<p><img src="../images/image-uploader.png" alt="Image Uploader"></p>
+<p>Aplikasi ini sangat sederhana, cara kerjanya yaitu gambar di upload ke server dan kemudian ditampilkan kembali ke browser. </p>
+<h2 id="server">Server</h2>
+<p>Pada sisi server aplikasi ini memakai framework ExpressJS untuk menangani request HTTP dan paket formidable untuk menangani file yang diupload. </p>
+<blockquote>
+<p>Catatan: Aplikasi ini memakai sedikit fitur ES6 seperti <code>let</code>, <code>const</code>, <em>arrow function</em> sehingga anda perlu menginstall setidaknya Node.js v4.2.1 LTS </p>
+</blockquote>
+<pre><code>server.post(&apos;/upload&apos;, (req, res) =&gt; {
+  let form = new formidable.IncomingForm()
+  form.uploadDir = path.join(__dirname, &apos;uploads&apos;)
+  form.hash = true
+  form.multiples = false
+  form.keepExtensions = true
+
+  form.parse(req, (err, fields, files) =&gt; {
+    if (!err) {
+      console.log(files.file.name)
+      console.log(files.file.path)
+      console.log(files.file.type)
+    }
+    res.end()
+  })
+})
+</code></pre><p>Kode diatas akan menangani file yang akan diupload dan menyimpan hasil upload pada direktori <code>uploads</code>. Formidable dapat dengan mudah dikonfigurasi, lihat <a href="https://github.com/felixge/node-formidable" target="_blank">Github Formidable</a>.</p>
+<h2 id="uploader">Uploader</h2>
+<p>Pada sisi klien uploder dibangun dengan memakai pustaka <a href="http://www.dropzonejs.com" target="_blank">DropzoneJS</a> yang mendukung <em>drag n drop</em> dan <em>preview thumbnail</em>. Pustaka ini sangat mudah untuk digunakan dan di kustomisasi</p>
+<pre><code>Dropzone.options.mydropzone = {
+  init: function () {
+    this.on(&quot;complete&quot;, function(file) {
+      updateImage()
+    })
+  },
+  maxFileSize : 2,
+  acceptedFiles: &apos;image/*&apos;
+}
+</code></pre><p>Konfigurasi diatas mengakibatkan uploader hanya menerima file bertipe gambar dan ukuran file tidak lebih dari 2MB dan yang perlu dicatat yaitu ketika file selesai diupload yaitu dengan mendengarkan event <code>complete</code> maka <em>list view</em> gambar yang dibuat dengan Kendo UI harus diupdate dengan memanggil metode <code>updateImage()</code>.</p>
+<h2 id="image-list">Image List</h2>
+<p>Kendo akan mengambil data dari server kemudian secara otomatis akan mengupdate <code>#listView</code> sesuai dengan banyaknya gambar yang telah terupload.</p>
+<pre><code>var updateImage = function () {
+  var dataSource = new kendo.data.DataSource({
+    transport: {
+      read: {
+        url: document.location.href+&apos;service/images&apos;,
+        dataType: &apos;json&apos;
+      }
+    },
+    pageSize: 21
+  })
+
+  $(&apos;#pager&apos;).kendoPager({
+    dataSource: dataSource
+  })
+
+  $(&apos;#listView&apos;).kendoListView({
+    dataSource: dataSource,
+    template: kendo.template($(&apos;#template&apos;).html())
+  })
+}
+</code></pre><p>Komponen Kendo UI yang dipakai adalah <code>ListView</code> dan framework UI ini seperti framework kebanyakan lainnya juga memakai template untuk menghasilkan UI secara dinamik. </p>
+<pre><code> &lt;div class=&quot;demo-section k-content wide&quot;&gt;
+        &lt;div id=&quot;listView&quot;&gt;&lt;/div&gt;
+        &lt;div id=&quot;pager&quot; class=&quot;k-pager-wrap&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;script type=&quot;text/x-kendo-template&quot; id=&quot;template&quot;&gt;
+      &lt;div class=&quot;product&quot;&gt;
+        &lt;img src=&quot;/#=ImageName#&quot;/&gt;
+        &lt;h3&gt;#:ImageId#&lt;/h3&gt;
+      &lt;/div&gt;
+    &lt;/script&gt;
+</code></pre><p>Data yang akan diambil dari server yaitu data gambar harus mempunyai field <code>ImageName</code> dan <code>ImageId</code>. </p>
+<p>Komponen yang disediakan oleh Kendo cukup lengkap dan jika anda tertarik dengan Kendo UI lebih lanjut silahkan berkunjung ke website resmi <a href="http://www.telerik.com" target="_blank">Telerik</a>.</p>
+<p>Untuk mengambil daftar gambar yang telah diupload klien akan mengakses URL berikut</p>
+<pre><code>http://localhost:5005/service/images
+</code></pre><p>Server hanya akan memfilter file dengan tipe <code>jpg</code> dan <code>png</code> pada folder <code>uploads</code>. Filter dilakukan dengan mengecek tipe file melalui paket <code>mime</code> tepatnya melalui metode <code>mime.lookup(image)</code>.</p>
+<pre><code>server.get(&apos;/service/images&apos;, (req, res) =&gt; {
+  let images = []
+  fs.readdir(upload_dir, (err, files) =&gt; {
+    if (!err) {
+      for (let imageIndex = 0; imageIndex &lt; files.length; imageIndex++) {
+        let ftype = mime.lookup(path.join(upload_dir, files[imageIndex]))
+        if (filetypes.indexOf(ftype) !== -1) {
+          let data = {}
+          data.ImageId = imageIndex
+          data.ImageName = files[imageIndex]
+          images.push(data)
+        }
+      }
+      res.json(images)
+    } else {
+      res.end()
+    }
+  })
+})
+</code></pre><p>Data yang dikembalikan ke klien adalah data JSON dengan format seperti berikut</p>
+<pre><code>[{
+  ImageId: 1,
+  ImageName: &apos;file.jpg&apos;
+}]
+</code></pre><p>Kode sumber dari aplikasi ini bisa anda dapatkan pada repo Github <a href="http://github.com/junwatu/image-uploader" target="_blank">Image Uploader</a>.</p>
 
                     
                     </section>
