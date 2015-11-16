@@ -37,7 +37,7 @@
         
     
     
-    <link rel="next" href="../testing/mocha_-_chain_-_sinon.html" />
+    <link rel="next" href="../testing/mocha.html" />
     
     
     <link rel="prev" href="../database/mongoose.html" />
@@ -48,7 +48,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="Testing" data-filepath="testing/README.md" data-basepath=".." data-revision="Sun Nov 15 2015 17:17:13 GMT+0700 (WIB)">
+    <div class="book" data-level="9" data-chapter-title="Testing" data-filepath="testing/README.md" data-basepath=".." data-revision="Mon Nov 16 2015 16:08:21 GMT+0700 (WIB)">
     
 
 <div class="book-summary">
@@ -614,10 +614,10 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="9.1" data-path="testing/mocha_-_chain_-_sinon.html">
+        <li class="chapter " data-level="9.1" data-path="testing/mocha.html">
             
                 
-                    <a href="../testing/mocha_-_chain_-_sinon.html">
+                    <a href="../testing/mocha.html">
                 
                         <i class="fa fa-check"></i>
                         
@@ -845,6 +845,35 @@
                     <section class="normal" id="section-">
                     
                         <h1 id="testing">Testing</h1>
+<p>Perangkat lunak tidak ada yang sempurna dan pasti mempunyai <em>bugs</em>. Salah satu cara untuk menguranginya atau mencegahnya untuk muncul di kemudian hari adalah dengan jalan melakukan pengetesan. Pengetesan memberikan keyakinan pada developer bahwa perangkat lunak bekerja sebagai mana mestinya dan jika ada perubahan misalnya penambahan atau pengurangan fitur dipastikan bahwa pengetesan akan selalu berhasil.</p>
+<p>Ada banyak tipe pengetesan tetapi dalam pengembangan aplikasi web ada dua tipe pengetesan yang penting untuk diketahui yaitu <strong>Unit Testing</strong> dan <strong>Acceptance Testing</strong>.</p>
+<h2 id="unit-testing">Unit Testing</h2>
+<p><strong>Unit Testing</strong> dilakukan langsung pada level kode aplikasi yaitu pada fungsi atau metode dan ada dua metodologi yang sering digunakan yaitu <strong>TDD</strong> dan <strong>BDD</strong>. Dalam JavaScript tersedia banyak pustaka yang dibuat untuk pengetesan seperti module <code>assert</code> bawaan dari Node.js, Nodeunit, Mocha, Jasmine dll.</p>
+<h3 id="test-driven-development-tdd">Test Driven Development (TDD)</h3>
+<p>Istilah TDD ini menjadi sangat keren beberapa tahun belakangan ini. Konsep TDD adalah melakukan pengetesan terlebih dahulu baru kemudian menulis kode dari aplikasi, jadi mindset dari pembuatan perangkat lunak dibalik kalo dalam pengembangan perangkat lunak yang konvensional alurnya yaitu menulis kode terlebih dahulu baru kemudian menulis kode untuk pengetesan sedangkan dalam <strong>Test Driven Development</strong> proses ini dibalik. </p>
+<p>Kelemahan pengetesan ini adalah pada proses awal biasanya dibutuhkan waktu yang relatif lebih lama untuk mengembangkan aplikasi karena harus menulis kode pengetesan terlebih dahulu tetapi keuntungan jangka panjangnya yaitu aplikasi yang dihasilkan biasanya mempunyai <em>bugs</em> yang lebih sedikit.</p>
+<h3 id="behavior-driven-development-bdd">Behavior Driven Development (BDD)</h3>
+<p>Pengetesan secara BDD memakai bahasa atau metode pengetesan yang lebih ramah yaitu dengan melakukan pengetesan dengan cara atau alur seperti <strong>user story</strong>. Ciri-ciri pustaka yang mendukung BDD seperti Mocha atau Jasmine yaitu pasti mempunyai metode pengetesan seperti <code>describe()</code> dan <code>it()</code>. </p>
+<pre><code>describe(&apos;Upload file&apos;, function(){
+  it(&apos;Harus bisa menerima file jpeg&apos;, function(){
+    //testing disini
+  })
+
+  it(&apos;Harus bisa menerima file png&apos;, function(){
+    //testing disini
+  })
+
+  it(&apos;Harus bisa menerima file xcf&apos;, function(){
+    //testing disini
+  })
+})
+</code></pre><p>Kalau diterjemahkan secara bahasa manusia maka kode testing BDD diatas akan mudah dibaca yaitu <em>Upload file harus bisa menerima file jpeg, png atau xcf</em>.</p>
+<h2 id="acceptance-testing">Acceptance Testing</h2>
+<p>Untuk pengetesan dari antar muka aplikasi web beserta fungsinya contohnya seperti pengetesan penekanan button apakah berfungsi dengan baik atau tidak adalah termasuk dari <strong>Acceptance Testing</strong>. Testing ini bisa dilakukan dengan memakai bantuan browser dan dengan munculnya <em>headless browser</em> seperti PhantomJS memungkinkan pengetesan dilakukan secara terintegrasi dengan kode <em>back-end</em>.</p>
+<blockquote>
+<p>Catatan penting dari testing adalah pengetesan diusahakan berjalan secara automatis sehingga jika ada kesalahan yang terjadi maka developer bisa segera memperbaikinya, maka dari itu testing pasti mempunyai yang namanya info laporan entah itu berupa file, output terminal atau antarmuka berupa web. Pada proses pengembangan perangkat lunak modern, automasi testing merupakan bagian yang sangat penting.</p>
+</blockquote>
+<p>Dalam buku ini pengetesan akan dibatasi pada pengetesan aplikasi web khususnya aplikasi Node.js dengan REST dengan memakai Mocha.</p>
 
                     
                     </section>
@@ -858,7 +887,7 @@
         <a href="../database/mongoose.html" class="navigation navigation-prev " aria-label="Previous page: Mongoose"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../testing/mocha_-_chain_-_sinon.html" class="navigation navigation-next " aria-label="Next page: Mocha"><i class="fa fa-angle-right"></i></a>
+        <a href="../testing/mocha.html" class="navigation navigation-next " aria-label="Next page: Mocha"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
