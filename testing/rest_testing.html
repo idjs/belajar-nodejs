@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Testing | Pengenalan Node.js</title>
+        <title>REST | Pengenalan Node.js</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.5.2">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../testing/rest_testing.html" />
+    <link rel="next" href="../testing/automasi.html" />
     
     
-    <link rel="prev" href="../database/mongoose.html" />
+    <link rel="prev" href="../testing/index.html" />
     
 
         
@@ -48,7 +48,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="Testing" data-filepath="testing/README.md" data-basepath=".." data-revision="Fri Nov 20 2015 03:32:10 GMT+0700 (WIB)">
+    <div class="book" data-level="9.1" data-chapter-title="REST" data-filepath="testing/rest_testing.md" data-basepath=".." data-revision="Fri Nov 20 2015 03:32:10 GMT+0700 (WIB)">
     
 
 <div class="book-summary">
@@ -598,7 +598,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="9" data-path="testing/index.html">
+        <li class="chapter " data-level="9" data-path="testing/index.html">
             
                 
                     <a href="../testing/index.html">
@@ -614,7 +614,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="9.1" data-path="testing/rest_testing.html">
+        <li class="chapter active" data-level="9.1" data-path="testing/rest_testing.html">
             
                 
                     <a href="../testing/rest_testing.html">
@@ -859,36 +859,56 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="testing">Testing</h1>
-<p>Perangkat lunak tidak ada yang sempurna dan pasti mempunyai <em>bugs</em>. Salah satu cara untuk menguranginya atau mencegahnya untuk muncul di kemudian hari adalah dengan jalan melakukan pengetesan. Pengetesan memberikan keyakinan pada developer bahwa perangkat lunak bekerja sebagai mana mestinya dan jika ada perubahan misalnya penambahan atau pengurangan fitur dipastikan bahwa pengetesan akan selalu berhasil.</p>
-<p>Ada banyak tipe pengetesan tetapi dalam pengembangan aplikasi web ada dua tipe pengetesan yang penting untuk diketahui yaitu <strong>Unit Testing</strong> dan <strong>Acceptance Testing</strong>.</p>
-<h2 id="unit-testing">Unit Testing</h2>
-<p><strong>Unit Testing</strong> dilakukan langsung pada level kode aplikasi yaitu pada fungsi atau metode dan ada dua metodologi yang sering digunakan yaitu <strong>TDD</strong> dan <strong>BDD</strong>. Dalam JavaScript tersedia banyak pustaka yang dibuat untuk pengetesan seperti module <code>assert</code> bawaan dari Node.js, Nodeunit, Mocha, Jasmine dll.</p>
-<h3 id="test-driven-development-tdd">Test Driven Development (TDD)</h3>
-<p>Istilah TDD ini menjadi sangat keren beberapa tahun belakangan ini. Konsep TDD adalah melakukan pengetesan terlebih dahulu baru kemudian menulis kode dari aplikasi, jadi mindset dari pembuatan perangkat lunak dibalik kalo dalam pengembangan perangkat lunak yang konvensional alurnya yaitu menulis kode terlebih dahulu baru kemudian menulis kode untuk pengetesan sedangkan dalam <strong>Test Driven Development</strong> proses ini dibalik. </p>
-<p>Kelemahan pengetesan ini adalah pada proses awal biasanya dibutuhkan waktu yang relatif lebih lama untuk mengembangkan aplikasi karena harus menulis kode pengetesan terlebih dahulu tetapi keuntungan jangka panjangnya yaitu aplikasi yang dihasilkan biasanya mempunyai <em>bugs</em> yang lebih sedikit.</p>
-<h3 id="behavior-driven-development-bdd">Behavior Driven Development (BDD)</h3>
-<p>Pengetesan secara BDD memakai bahasa atau metode pengetesan yang lebih ramah yaitu dengan melakukan pengetesan dengan cara atau alur seperti <strong>user story</strong> sehingga pengetesan ini relatif lebih populer karena secara bahasa menjembatani atau memungkinkan kolaborasi antara developer dan klien. Ada banyak pustaka pengetesan yang memakai BDD seperti Mocha, Jasmin, Vows dll. Sebagai gambaran contoh untuk pustaka Mocha misalnya  </p>
-<pre><code>describe(&apos;Upload file&apos;, function(){
-  it(&apos;Harus bisa menerima file jpeg&apos;, function(){
-    //testing disini
-  })
+                        <h1 id="pengetesan-rest">Pengetesan REST</h1>
+<p>Kita ambil contoh server yang dibuat dengan ExpressJS. Server dibawah ini akan mengeluarkan data berupa JSON pada URL <code>/</code>.</p>
+<pre><code>var express = require(&apos;express&apos;)
+var app = express()
 
-  it(&apos;Harus bisa menerima file png&apos;, function(){
-    //testing disini
-  })
-
-  it(&apos;Harus bisa menerima file xcf&apos;, function(){
-    //testing disini
+app.get(&apos;/&apos;, function (req, res) {
+  res.json({
+    message: &apos;hello&apos;
   })
 })
-</code></pre><p>Kalau diterjemahkan secara bahasa manusia maka kode testing BDD diatas akan mudah dibaca yaitu <em>Upload file harus bisa menerima file jpeg, png atau xcf</em>.</p>
-<h2 id="acceptance-testing">Acceptance Testing</h2>
-<p>Untuk pengetesan dari antar muka aplikasi web beserta fungsinya contohnya seperti pengetesan penekanan button apakah berfungsi dengan baik atau tidak adalah termasuk dari <strong>Acceptance Testing</strong>. Testing ini bisa dilakukan dengan memakai bantuan browser dan dengan munculnya <em>headless browser</em> seperti PhantomJS memungkinkan pengetesan dilakukan secara terintegrasi dengan kode <em>back-end</em>.</p>
-<blockquote>
-<p>Catatan penting dari testing adalah pengetesan diusahakan berjalan secara automatis sehingga jika ada kesalahan yang terjadi maka developer bisa segera memperbaikinya, maka dari itu testing pasti mempunyai yang namanya info laporan entah itu berupa file, output terminal atau antarmuka berupa web. Pada proses pengembangan perangkat lunak modern, automasi testing merupakan bagian yang sangat penting.</p>
-</blockquote>
-<p>Dalam buku ini pengetesan akan dibatasi pada pengetesan aplikasi web khususnya aplikasi Node.js dengan REST dengan memakai Mocha.</p>
+
+module.exports = app
+</code></pre><p>Lalu bagaimana cara mengetest URL <code>/</code> diatas? dengan memakai Mocha, module <code>assert</code> dan modul <a href="https://github.com/visionmedia/supertest" target="_blank">Supertest</a> yaitu modul npm yang khusus untuk mengetest server HTTP. Mocha termasuk pustaka pengetesan yang bisa dipakai secara BDD ataupun TDD. Pustaka ini secara default memakai style BDD dan metode yang yang biasa dipakai adalah <code>describe</code> &amp; <code>it</code>. </p>
+<pre><code>var mocha = require(&apos;mocha&apos;)
+var request = require(&apos;supertest&apos;)
+var assert = require(&apos;assert&apos;)
+var app = require(&apos;../app&apos;)
+
+describe(&apos;Test REST API&apos;, function(){
+  describe(&apos;GET /&apos;, function(){
+    it(&apos;should return json with key &quot;message&quot; and value &quot;hello&quot;&apos;, function(done){
+      request(app).get(&apos;/&apos;)
+      .set(&apos;Accept&apos;, &apos;application/json&apos;)
+      .expect(&apos;Content-Type&apos;, /json/)
+      .expect(200)
+      .expect(function(res){
+          assert.equal(res.body.message, &apos;hello&apos;)
+      })
+      .end(function(err, res){
+          if(err) return done(err)
+          done()
+      })
+    })
+  })
+})
+</code></pre><p>Perlu anda ingat bahwa supertest akan secara otomatis menjalankan server ExpressJS dan mengalokasikan port sehingga anda tidak perlu mejalankan server secara langsung.</p>
+<pre><code>request(app)
+</code></pre><p>Kalau diterjemahkan dalam bahasa manusia kode diatas akan mengetest beberapa kondisi yaitu</p>
+<pre><code>expect(&apos;Content-Type&apos;, /json/)
+</code></pre><p>kode diatas artinya diharapkan response dari GET untuk URL <code>/</code> adalah bertipe <code>json</code></p>
+<pre><code>expect(200)
+</code></pre><p>kode diatas artinya <strong>response code</strong> dari request HTTP harus mempunyai kode 200.</p>
+<pre><code>expect(function(res){
+  assert.equal(res.body.message, &apos;hello&apos;)
+})
+</code></pre><p>dan kode diatas artinya diharapkan bahwa <strong>response body</strong> dengan field <code>message</code> mempunyai value <code>hello</code> dan tentu saja anda bisa menambahkan banyak kondisi untuk pengetesan yang lebih detil. </p>
+<p>Untuk melakukan pengetesan cukup dengan menginstal dan jalankan <code>mocha</code> maka secara otomatis mocha akan menjalankan berkas berkas pengetesan yang berada pada folder <code>test</code>.</p>
+<pre><code>$ npm install -g mocha
+</code></pre><p><img src="../images/testing-mocha.png" alt=""></p>
+<p>Sebenarnya banyak yang bisa dijelaskan tentang pengetesan dan sudah banyak resource online diluar sana yang membahas tentang ini tapi yang perlu anda ingat adalah pastikan pengetesan dimasukkan dalam alur kerja dalam pengembangan perangkat lunak yang sedang anda kerjakan. </p>
 
                     
                     </section>
@@ -899,10 +919,10 @@
         </div>
 
         
-        <a href="../database/mongoose.html" class="navigation navigation-prev " aria-label="Previous page: Mongoose"><i class="fa fa-angle-left"></i></a>
+        <a href="../testing/index.html" class="navigation navigation-prev " aria-label="Previous page: Testing"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../testing/rest_testing.html" class="navigation navigation-next " aria-label="Next page: REST"><i class="fa fa-angle-right"></i></a>
+        <a href="../testing/automasi.html" class="navigation navigation-next " aria-label="Next page: Automasi"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>

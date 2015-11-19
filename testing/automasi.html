@@ -5,7 +5,7 @@
         
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>Testing | Pengenalan Node.js</title>
+        <title>Automasi | Pengenalan Node.js</title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="generator" content="GitBook 2.5.2">
@@ -37,10 +37,10 @@
         
     
     
-    <link rel="next" href="../testing/rest_testing.html" />
+    <link rel="next" href="../todatauri/todatauri.html" />
     
     
-    <link rel="prev" href="../database/mongoose.html" />
+    <link rel="prev" href="../testing/rest_testing.html" />
     
 
         
@@ -48,7 +48,7 @@
     <body>
         
         
-    <div class="book" data-level="9" data-chapter-title="Testing" data-filepath="testing/README.md" data-basepath=".." data-revision="Fri Nov 20 2015 03:32:10 GMT+0700 (WIB)">
+    <div class="book" data-level="9.2" data-chapter-title="Automasi" data-filepath="testing/automasi.md" data-basepath=".." data-revision="Fri Nov 20 2015 03:32:10 GMT+0700 (WIB)">
     
 
 <div class="book-summary">
@@ -598,7 +598,7 @@
             
         </li>
     
-        <li class="chapter active" data-level="9" data-path="testing/index.html">
+        <li class="chapter " data-level="9" data-path="testing/index.html">
             
                 
                     <a href="../testing/index.html">
@@ -629,7 +629,7 @@
             
         </li>
     
-        <li class="chapter " data-level="9.2" data-path="testing/automasi.html">
+        <li class="chapter active" data-level="9.2" data-path="testing/automasi.html">
             
                 
                     <a href="../testing/automasi.html">
@@ -859,36 +859,42 @@
                 
                     <section class="normal" id="section-">
                     
-                        <h1 id="testing">Testing</h1>
-<p>Perangkat lunak tidak ada yang sempurna dan pasti mempunyai <em>bugs</em>. Salah satu cara untuk menguranginya atau mencegahnya untuk muncul di kemudian hari adalah dengan jalan melakukan pengetesan. Pengetesan memberikan keyakinan pada developer bahwa perangkat lunak bekerja sebagai mana mestinya dan jika ada perubahan misalnya penambahan atau pengurangan fitur dipastikan bahwa pengetesan akan selalu berhasil.</p>
-<p>Ada banyak tipe pengetesan tetapi dalam pengembangan aplikasi web ada dua tipe pengetesan yang penting untuk diketahui yaitu <strong>Unit Testing</strong> dan <strong>Acceptance Testing</strong>.</p>
-<h2 id="unit-testing">Unit Testing</h2>
-<p><strong>Unit Testing</strong> dilakukan langsung pada level kode aplikasi yaitu pada fungsi atau metode dan ada dua metodologi yang sering digunakan yaitu <strong>TDD</strong> dan <strong>BDD</strong>. Dalam JavaScript tersedia banyak pustaka yang dibuat untuk pengetesan seperti module <code>assert</code> bawaan dari Node.js, Nodeunit, Mocha, Jasmine dll.</p>
-<h3 id="test-driven-development-tdd">Test Driven Development (TDD)</h3>
-<p>Istilah TDD ini menjadi sangat keren beberapa tahun belakangan ini. Konsep TDD adalah melakukan pengetesan terlebih dahulu baru kemudian menulis kode dari aplikasi, jadi mindset dari pembuatan perangkat lunak dibalik kalo dalam pengembangan perangkat lunak yang konvensional alurnya yaitu menulis kode terlebih dahulu baru kemudian menulis kode untuk pengetesan sedangkan dalam <strong>Test Driven Development</strong> proses ini dibalik. </p>
-<p>Kelemahan pengetesan ini adalah pada proses awal biasanya dibutuhkan waktu yang relatif lebih lama untuk mengembangkan aplikasi karena harus menulis kode pengetesan terlebih dahulu tetapi keuntungan jangka panjangnya yaitu aplikasi yang dihasilkan biasanya mempunyai <em>bugs</em> yang lebih sedikit.</p>
-<h3 id="behavior-driven-development-bdd">Behavior Driven Development (BDD)</h3>
-<p>Pengetesan secara BDD memakai bahasa atau metode pengetesan yang lebih ramah yaitu dengan melakukan pengetesan dengan cara atau alur seperti <strong>user story</strong> sehingga pengetesan ini relatif lebih populer karena secara bahasa menjembatani atau memungkinkan kolaborasi antara developer dan klien. Ada banyak pustaka pengetesan yang memakai BDD seperti Mocha, Jasmin, Vows dll. Sebagai gambaran contoh untuk pustaka Mocha misalnya  </p>
-<pre><code>describe(&apos;Upload file&apos;, function(){
-  it(&apos;Harus bisa menerima file jpeg&apos;, function(){
-    //testing disini
-  })
-
-  it(&apos;Harus bisa menerima file png&apos;, function(){
-    //testing disini
-  })
-
-  it(&apos;Harus bisa menerima file xcf&apos;, function(){
-    //testing disini
-  })
-})
-</code></pre><p>Kalau diterjemahkan secara bahasa manusia maka kode testing BDD diatas akan mudah dibaca yaitu <em>Upload file harus bisa menerima file jpeg, png atau xcf</em>.</p>
-<h2 id="acceptance-testing">Acceptance Testing</h2>
-<p>Untuk pengetesan dari antar muka aplikasi web beserta fungsinya contohnya seperti pengetesan penekanan button apakah berfungsi dengan baik atau tidak adalah termasuk dari <strong>Acceptance Testing</strong>. Testing ini bisa dilakukan dengan memakai bantuan browser dan dengan munculnya <em>headless browser</em> seperti PhantomJS memungkinkan pengetesan dilakukan secara terintegrasi dengan kode <em>back-end</em>.</p>
-<blockquote>
-<p>Catatan penting dari testing adalah pengetesan diusahakan berjalan secara automatis sehingga jika ada kesalahan yang terjadi maka developer bisa segera memperbaikinya, maka dari itu testing pasti mempunyai yang namanya info laporan entah itu berupa file, output terminal atau antarmuka berupa web. Pada proses pengembangan perangkat lunak modern, automasi testing merupakan bagian yang sangat penting.</p>
-</blockquote>
-<p>Dalam buku ini pengetesan akan dibatasi pada pengetesan aplikasi web khususnya aplikasi Node.js dengan REST dengan memakai Mocha.</p>
+                        <h1 id="automasi">Automasi</h1>
+<p>Dalam prakteknya biasanya testing ini dilakukan secara otomatis misalnya jika anda memakai Github dalam pengembangan perangkat lunak open source maka anda bisa memakai server <strong>Travis</strong> yang dengan setting konfigurasi tertentu akan menjalankan pengetesan jika anda menge-<em>push</em> kode ke repository Github atau anda bisa memakai <em>build server</em> yang ada diluaran seperti <strong>Jenkins</strong>, <strong>Bamboo</strong>, <strong>TeamCity</strong> dll.</p>
+<h2 id="travis">Travis</h2>
+<p>Jika anda memakai Github dan menggunanakan Travis maka secara default server travis ini akan menjalankan command</p>
+<pre><code>$ npm test
+</code></pre><p>sehingga dalam package.json yang anda push ke Github anda perlu menulis script untuk pengetesan misalnya jika memakai Mocha </p>
+<pre><code>&quot;scripts&quot;: {
+    &quot;test&quot;: &quot;mocha&quot;
+}
+</code></pre><h3 id="travisyml">.travis.yml</h3>
+<p>Untuk setting Travis anda cukup membuat file <strong>.travis.yml</strong> pada folder projek misalnya seperti dibawah ini (contoh source code projek test ada di <a href="https://github.com/junwatu/testing-learn" target="_blank">sini</a>)</p>
+<pre><code>.
+&#x251C;&#x2500;&#x2500; app.js
+&#x251C;&#x2500;&#x2500; .travis.yml
+&#x251C;&#x2500;&#x2500; node_modules
+&#x251C;&#x2500;&#x2500; package.json
+&#x2514;&#x2500;&#x2500; test
+    &#x2514;&#x2500;&#x2500; app.test.js
+</code></pre><p>Dengan isi file tersebut adalah versi dari Node.js dimana test akan dijalankan. Misalnya untuk menjalankan pengetesan Node.js versi 4.1 dan 4.0</p>
+<pre><code>language: node_js
+node_js:
+  - &quot;4.1&quot;
+  - &quot;4.0&quot;
+</code></pre><p>Kemudian anda perlu mengatur konfigurasi repo di Github (<a href="https://github.com/junwatu/testing-learn" target="_blank">Testing Learn</a>). Supaya Github bisa memakai service dari Travis maka anda perlu meengubah konfigurasi repo (Masuk ke menu <strong>Settings</strong>)</p>
+<p><img src="../images/github-service.png" alt=""></p>
+<h3 id="enable-build">Enable Build</h3>
+<p>Supaya build selalu dijalankan oleh Travis maka anda harus meng-<strong>ON</strong>-kan tombol enable di <a href="https://travis-ci.org" target="_blank">travis-ci.org</a> pada repo yang anda inginkan. </p>
+<p><img src="../images/enable.png" alt=""></p>
+<h3 id="test-build">Test Build</h3>
+<p>Build akan dijalankan oleh Travis setiap ada kode baru di Github atau anda bisa menggunakan tombol <strong>Test Service</strong> pada <strong>Settings</strong> -&gt; <strong>Webhooks &amp; services</strong> untuk <strong>force build</strong>. </p>
+<p><img src="../images/testing-ci.png" alt=""></p>
+<h3 id="notifikasi">Notifikasi</h3>
+<p>Notifikasi Travis bisa di integrasikan dengan Slack, Email, dll atau biasanya dengan gambar status di README repo. Untuk konfigurasi gambar status klik tombol <strong>Build/Passing</strong> di sebelah nama repo di Travis dan <em>copy paste</em> ke README repo di Github. </p>
+<p><img src="../images/image-build.png" alt=""></p>
+<p>Sehingga jika anda membuka repo di Github maka akan muncul gambar status yang apakah build sukses atau dalam status error.</p>
+<p><img src="../images/notif.png" alt=""></p>
 
                     
                     </section>
@@ -899,10 +905,10 @@
         </div>
 
         
-        <a href="../database/mongoose.html" class="navigation navigation-prev " aria-label="Previous page: Mongoose"><i class="fa fa-angle-left"></i></a>
+        <a href="../testing/rest_testing.html" class="navigation navigation-prev " aria-label="Previous page: REST"><i class="fa fa-angle-left"></i></a>
         
         
-        <a href="../testing/rest_testing.html" class="navigation navigation-next " aria-label="Next page: REST"><i class="fa fa-angle-right"></i></a>
+        <a href="../todatauri/todatauri.html" class="navigation navigation-next " aria-label="Next page: To Data URI"><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
