@@ -863,7 +863,7 @@
 <p>Kembali ke Javascript!. Untuk mengetahui apa yang dimaksud dengan pemrograman asinkron bisa lebih mudah dengan memakai pendekatan contoh kode. Perhatikan kode Javascript pada Node.js berikut</p>
 <pre><code>var fs = require(&apos;fs&apos;);
 
-fs.readFile(&apos;./resource.json&apos;,function(err, data){
+fs.readFile(&apos;./resource.json&apos;, &apos;utf-8&apos;,function(err, data){
     if(err) throw err;
     console.log(JSON.parse(data));
 });
